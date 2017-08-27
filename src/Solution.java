@@ -77,7 +77,38 @@ public class Solution {
         return nums.length;
     }
 
-    public String countAndSay(int n) {
-        return null;
+    public int maxSubArray(int[] nums) {
+        int left = 0;
+        int right = 0;
+        int sum = 0;
+        int sumAlt = 0;
+        while (right <= nums.length && left <= nums.length){
+            if (nums[left] > 0){
+                if (right <= left) {
+                    right++;
+                    sum += nums[right];
+                }
+            }
+            else {
+                //reset the sum if left is changed
+                left++;
+                sum += nums[left];
+            }
+        }
+        return sum;
+    }
+
+    public int lengthOfLastWord(String s) {
+        int sum = 0;
+        if (s.length() > 0) {
+            for (int i = s.length()-1; i > 0; i--){
+                String item = s.substring(i-1, i);
+                if (item.equals(" ")){
+                    return sum;
+                }
+                sum++;
+            }
+        }
+        return sum;
     }
 }
