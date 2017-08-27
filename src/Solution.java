@@ -71,9 +71,13 @@ public class Solution {
         if (nums.length == 0) { return 0; }
         else {
             for (int i = 0; i < nums.length; i++) {
-                if (target < nums[i] || nums[i] == target) { return i; }
+                if (target <= nums[i]) { return i; }
             }
         }
-        return 0;
+        return nums.length;
+    }
+
+    public String countAndSay(int n) {
+        return null;
     }
 }
