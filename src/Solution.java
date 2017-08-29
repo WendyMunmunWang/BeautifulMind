@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
-
+import java.util.List;
 /**
  * Created by wendywang on 2017-08-26.
  */
@@ -142,8 +143,10 @@ public class Solution {
             } else if (Integer.parseInt(item_a) == 0 && Integer.parseInt(item_b) == 0) {
                 item_result = "0";
             }
-            if (tracker == 0) {
-                result += item_result;
+            if (tracker == 0) { result = item_result + result; }
+            else {
+                result = item_result + result;
+
             }
 
         }
@@ -204,6 +207,7 @@ public class Solution {
             //count the stop times based on the # of targeted floors in the hashtable
             else {
                 counter += sameElevator.size() + 1;
+                //reset all the tracking variables
                 sameElevator = new HashSet();
                 sameElevator.add(B[i]);
                 totalPeople = 1;
@@ -213,6 +217,42 @@ public class Solution {
         counter += sameElevator.size() + 1;
         return counter;
     }
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) { return true; }
+        else if ((p == null && q != null) || (p != null && q == null)){
+            return false;
+        }
+        //both p and q are not null
+        else if (p.val == q.val) {
+                return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        }
+        return false;
+    }
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        if (root == null) {return null;}
+        else {
+            List<Integer> result = new ArrayList<>();
+            int item = root.val;
+            result.add(item);
+        }
+
+        return null;
+    }
+
+    public List<Integer> findAnagrams(String s, String p) {
+        String p_sub = p;
+        for (int i = 0; i < s.length(); i++){
+            String item = s.substring(i, ++i);
+            int removeIndex = p_sub.indexOf(item);
+            if (removeIndex != -1) {
+                p_sub.replace(item, "");
+            }
+        }
+        return null;
+    }
+
 }
 
 
