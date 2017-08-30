@@ -19,5 +19,11 @@ public class Main {
         int[] elevatorA = {60, 80, 40};
         int[] elevatorB = {2, 3, 5};
         System.out.println(sol.elevator(elevatorA, elevatorB, 5, 2, 200));
+        String anagram_a = "abc";
+        String anagram_b = "bca";
+        System.out.println(sol.isAnagram(anagram_a, anagram_b));
+        String a = "ababababab";
+        String b = "aab";
+        System.out.println(sol.findAnagrams(a, b));
     }
 }

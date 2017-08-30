@@ -243,15 +243,30 @@ public class Solution {
 
     public List<Integer> findAnagrams(String s, String p) {
         String p_sub = p;
-        for (int i = 0; i < s.length(); i++){
-            String item = s.substring(i, ++i);
-            int removeIndex = p_sub.indexOf(item);
-            if (removeIndex != -1) {
-                p_sub.replace(item, "");
-            }
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i <= s.length()-p.length(); i++){
+            p_sub = p;
+            String item = s.substring(i, p.length()+i);
+            if (isAnagram(item,p_sub)) { result.add(i); }
         }
-        return null;
+        return result;
     }
+    //assume both string a and string b are the same length
+    public boolean isAnagram(String a, String b) {
+        if (a.length() == 0 && b.length() == 0) { return true; }
+        else {
+            for (int i = 0; i < a.length(); i++){
+                String item = a.substring(i, i+1);
+                if (b.indexOf(item) == -1) {
+                    break;
+                }
+                else { b = b.replace(item, ""); }
+            }
+            if (b.length() == 0) { return true; }
+            else return false;
+        }
+    }
+
 
 }
 
