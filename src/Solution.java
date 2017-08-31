@@ -267,6 +267,56 @@ public class Solution {
         }
     }
 
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) return false;
+        else if (root.val == sum && root.left == null && root.right == null) return true;
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+
+    public boolean isHappy(int n) {
+        int result = 0;
+        int remain = n;
+        if (n < 0) return false;
+        else {
+            while ( remain != 0 ){
+                int item = remain % 10;
+                result += Math.pow(item, 2);
+                remain = (remain - item) / 10;
+            }
+            if (result == 1) {
+                return true;
+            }
+            else return isHappy(result);
+        }
+    }
+
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length < 2) return 0;
+        else {
+            int min = 0;
+            int ptr = 1;
+            int max = 1;
+            int diff = prices[max] - prices[min];
+            while (ptr < prices.length){
+                if (prices[ptr] < prices[min]) {
+                    min = ptr;
+                    max = ptr;
+                }
+                if (prices[ptr] > prices[max]) {
+                    max = ptr;
+                    if (diff < (prices[max] - prices[min])) {
+                        diff = prices[max] - prices[min];
+                    }
+                }
+                ptr++;
+            }
+            if (diff > 0) return diff;
+            else return 0;
+        }
+    }
+
+
+
 
 }
 

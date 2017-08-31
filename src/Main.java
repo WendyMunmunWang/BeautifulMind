@@ -25,5 +25,12 @@ public class Main {
         String a = "ababababab";
         String b = "aab";
         System.out.println(sol.findAnagrams(a, b));
+        System.out.println(sol.isHappy(19));
+        int[] prices1 = {7, 1, 5, 3, 6, 4};
+        int[] prices2 = {7, 6, 4, 3, 1};
+        int[] prices3 = {3, 7, 2, 9};
+        System.out.println(sol.maxProfit(prices1));
+        System.out.println(sol.maxProfit(prices2));
+        System.out.println(sol.maxProfit(prices3));
     }
 }
