@@ -32,5 +32,7 @@ public class Main {
         System.out.println(sol.maxProfit(prices1));
         System.out.println(sol.maxProfit(prices2));
         System.out.println(sol.maxProfit(prices3));
+        int[] singleNums = {2, 3, 5, 3, 2};
+        System.out.println(sol.singleNumber(singleNums));
     }
 }

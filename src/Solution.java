@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
+
 /**
  * Created by wendywang on 2017-08-26.
  */
@@ -313,6 +311,20 @@ public class Solution {
             if (diff > 0) return diff;
             else return 0;
         }
+    }
+
+    public int singleNumber(int[] nums) {
+        HashMap hashMap = new HashMap();
+        for (int i = 0; i < nums.length; i++){
+            int item = nums[i];
+            if (hashMap.containsKey(item)){
+                hashMap.remove(item);
+            }
+            else {
+                hashMap.put(item, 1);
+            }
+        }
+        return (Integer) hashMap.keySet().toArray()[0];
     }
 
 
