@@ -327,6 +327,31 @@ public class Solution {
         return (Integer) hashMap.keySet().toArray()[0];
     }
 
+    public List<List<Integer>> generate(int numRows) {
+        int rowNumber = 0;
+        List<List<Integer>> result = new ArrayList<>();
+        if (numRows > 0) {
+            List itemResult;
+            while (rowNumber < numRows) {
+                itemResult = new ArrayList();
+                itemResult.add(1);
+                if (result.size() > 0) {
+                    List lastList = result.get(result.size() - 1);
+                    if (lastList.size() > 1) {
+                        for (int i = 0; i < lastList.size() - 1; i++) {
+                            int item = (Integer) lastList.get(i) + (Integer) lastList.get(i + 1);
+                            itemResult.add(item);
+                        }
+                    }
+                    itemResult.add(1);
+                }
+                result.add(itemResult);
+                rowNumber++;
+            }
+        }
+        return result;
+    }
+
 
 
 
