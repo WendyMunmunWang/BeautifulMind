@@ -352,6 +352,63 @@ public class Solution {
         return result;
     }
 
+    public ListNode reverseLinkedList(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        else {
+            ListNode curr = head;
+            ListNode prev = null;
+            ListNode next = null;
+            while (curr != null){
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            return prev;
+        }
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums.length == 0){
+            return null;
+        }
+        else {
+            int mid = (int) Math.floor(nums.length/2);
+            TreeNode tree = new TreeNode(nums[mid]);
+            if (mid-1 >= 0){
+                int[] leftArray = Arrays.copyOfRange(nums, 0, mid);
+                tree.left = sortedArrayToBST(leftArray);
+            }
+            else if (nums.length-1 >= mid+1){
+                int[] rightArray = Arrays.copyOfRange(nums, mid+1, nums.length);
+                tree.right = sortedArrayToBST(rightArray);
+            }
+            return tree;
+        }
+    }
+
+    public int[] rotate(int[] nums, int k) {
+        if (nums != null && nums.length > 1){
+            reverseArray(nums, 0, k);
+            reverseArray(nums, k+1, nums.length-1);
+            reverseArray(nums, 0, nums.length-1);
+        }
+        return nums;
+    }
+
+    public void reverseArray(int[] nums, int left, int right){
+        while (left < right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
+
+
 
 
 

@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by wendywang on 2017-08-26.
  */
@@ -45,5 +48,14 @@ public class Main {
         System.out.println(sol.generate(5));
         System.out.println(sol.generate(1));
         System.out.println(sol.generate(0));
+//        ListNode listNode1 = new ListNode(1);
+//        ListNode listNode2 = new ListNode(1);
+//        listNode1.next = listNode2;
+//        listNode2.next = null;
+//        System.out.println(sol.reverseLinkedList(listNode1));
+//        int[] sortedArray = {3, 5, 8};
+//        System.out.println(sol.sortedArrayToBST(sortedArray));
+        int[] reverseArray = {1, 2};
+        System.out.println(Arrays.toString(sol.rotate(reverseArray, 0)));
     }
 }
