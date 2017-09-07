@@ -433,6 +433,18 @@ public class Solution {
         return true;
     }
 
+    public boolean hasCycle(ListNode head) {
+        if (head == null) { return false; }
+        else {
+            ListNode ptr = head.next;
+            while(ptr != null){
+                if (ptr == head) return true;
+                ptr = ptr.next;
+            }
+            return false;
+        }
+    }
+
 
 
 
