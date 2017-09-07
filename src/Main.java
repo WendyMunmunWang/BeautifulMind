@@ -57,5 +57,9 @@ public class Main {
 //        System.out.println(sol.sortedArrayToBST(sortedArray));
         int[] reverseArray = {1, 2};
         System.out.println(Arrays.toString(sol.rotate(reverseArray, 0)));
+        String s1 = "dd";
+        String s3 = "0p";
+        System.out.println(sol.isPalindrome(s1));
+        System.out.println(sol.isPalindrome(s3));
     }
 }

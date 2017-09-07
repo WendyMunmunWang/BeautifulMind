@@ -1,3 +1,4 @@
+import javax.print.attribute.standard.Chromaticity;
 import java.util.*;
 
 /**
@@ -408,6 +409,29 @@ public class Solution {
         }
     }
 
+    public boolean isPalindrome(String s) {
+        int leftptr = 0;
+        int rightptr = s.length()-1;
+        s = s.toLowerCase();
+        while (leftptr < rightptr){
+            char leftItem = s.charAt(leftptr);
+            char rightItem = s.charAt(rightptr);
+            if ( leftItem == rightItem
+                    && Character.isLetterOrDigit(leftItem)
+                    && Character.isLetterOrDigit(rightItem)){
+                leftptr++;
+                rightptr--;
+            }
+            else if (!Character.isLetterOrDigit(leftItem)){
+                leftptr++;
+            }
+            else if (!Character.isLetterOrDigit(rightItem)){
+                rightptr--;
+            }
+            else return false;
+        }
+        return true;
+    }
 
 
 
