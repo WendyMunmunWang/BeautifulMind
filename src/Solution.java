@@ -434,20 +434,78 @@ public class Solution {
     }
 
     public boolean hasCycle(ListNode head) {
-        if (head == null) { return false; }
+        if (head == null || head.next == null) {
+            return false;
+        }
         else {
             ListNode ptr = head.next;
-            while(ptr != null){
-                if (ptr == head) return true;
+            ListNode fastPtr = head.next;
+            if (fastPtr == null || ptr == null){
+                return false;
+            }
+            while(ptr != fastPtr){
+                fastPtr = fastPtr.next.next;
                 ptr = ptr.next;
+                if (fastPtr == null || ptr == null){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public int[] findErrorNums(int[] nums) {
+        if (nums.length == 0) return null;
+        else {
+            int i = 0;
+            int item;
+            int max = Integer.MIN_VALUE;
+            int sum = 0;
+            int repeat = 0;
+            int[] result = new int[2];
+            Set set = new HashSet();
+            while (i < nums.length){
+                item = nums[i];
+                if (max < item){ max = item;}
+                    if (!set.contains(item)) {
+                        set.add(item);
+                    }
+                    else repeat = item;
+
+                sum = sum + item;
+                i++;
+            }
+            int realSum = ((1 + max)*nums.length)/2;
+            int missingNum = realSum - (sum-repeat);
+            if (set.contains(missingNum)){
+                missingNum = max + 1;
+            }
+            result[0] = repeat;
+            result[1] = missingNum;
+            return result;
+        }
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return false;
+        }
+        else {
+            Set<Integer> set = new HashSet<Integer>();
+            for (int i = 0; i < nums.length; i++){
+                if (!set.contains(nums[i])){set.add(nums[i]);}
+                else {return true;}
             }
             return false;
         }
+   }
+
+    public int majorityElement(int[] nums) {
+
+        return 0;
     }
 
 
 
 
 }
-
-

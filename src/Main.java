@@ -61,10 +61,12 @@ public class Main {
         String s3 = "0p";
         System.out.println(sol.isPalindrome(s1));
         System.out.println(sol.isPalindrome(s3));
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = head.next;
-        System.out.println("Has cycle: " + sol.hasCycle(head));
+//        ListNode head = new ListNode(1);
+//        head.next = new ListNode(2);
+//        head.next.next = new ListNode(3);
+//        head.next.next.next = head.next;
+//        System.out.println("Has cycle: " + sol.hasCycle(head));
+        int[] errorNums = {2, 2};
+        System.out.println(Arrays.toString(sol.findErrorNums(errorNums)));
     }
 }
