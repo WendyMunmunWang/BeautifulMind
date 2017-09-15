@@ -68,5 +68,25 @@ public class Main {
 //        System.out.println("Has cycle: " + sol.hasCycle(head));
         int[] errorNums = {2, 2};
         System.out.println(Arrays.toString(sol.findErrorNums(errorNums)));
+        int[] flowerbed = {1, 0, 0, 0, 1};
+        System.out.println(sol.canPlaceFlowers(flowerbed, 2));
+        int[] checkPos = {2,3,3,2,4}; //should return true
+        int[] checkPos2 = {4,2,3}; //should return true
+        int[] checkPos3 = {1,2,3}; //should return true
+        int[] checkPos4 = {3,4,2,3}; //should return false
+        int[] checkPos5 = {-1, 4, 2, 3}; //should return true
+        int[] checkPos6 = {4,2,1};//should return false
+        int[] checkPos7 = {3,1};//should return true
+        System.out.println(sol.checkPossibility(checkPos));
+        System.out.println(sol.checkPossibility(checkPos2));
+        System.out.println(sol.checkPossibility(checkPos3));
+        System.out.println(sol.checkPossibility(checkPos4));
+        System.out.println(sol.checkPossibility(checkPos5));
+        System.out.println(sol.checkPossibility(checkPos6));
+        System.out.println(sol.checkPossibility(checkPos7));
+        int ssnum = 3;
+        System.out.println("sum of square numbers: " + sol.judgeSquareSum( ssnum));
+        String word = "FlaG";
+        System.out.println("detect: " + sol.detectCapitalUse(word));
     }
 }

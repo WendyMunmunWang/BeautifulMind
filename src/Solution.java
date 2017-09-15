@@ -1,5 +1,7 @@
 import javax.print.attribute.standard.Chromaticity;
 import java.util.*;
+import com.sun.deploy.util.StringUtils.*;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 /**
  * Created by wendywang on 2017-08-26.
@@ -501,8 +503,201 @@ public class Solution {
    }
 
     public int majorityElement(int[] nums) {
-
+        HashMap hashMap = new HashMap();
+        for (int i = 0; i < nums.length; i++){
+            int item = nums[i];
+            if (hashMap.containsKey(item)){
+                hashMap.put(item, (int)hashMap.get(item)+1);
+            }
+            else{
+                hashMap.put(item, 1);
+            }
+        }
+        int result = 0;
+        for (int j = 0; j < hashMap.size(); j++){
+            //how to iterate over a hashtable
+        }
         return 0;
+    }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode ptrA = headA;
+        ListNode ptrB = headB;
+        int sizeA = 0;
+        int sizeB = 0;
+        while (ptrA != null){
+            ptrA = ptrA.next;
+            sizeA++;
+        }
+        while (ptrB != null){
+            ptrB = ptrB.next;
+            sizeB++;
+        }
+        if (sizeA == sizeB) return headA;
+        else if (sizeA > sizeB) {
+            int lengthDiff = sizeA - sizeB;
+            ListNode ptr = headA;
+            while (lengthDiff > 0){
+                ptr = ptr.next;
+                lengthDiff--;
+            }
+            ptrB = headB;
+            while (ptr != null && ptrB != null){
+                ptr = ptr.next;
+                ptrB = ptrB.next;
+                if (ptr == ptrB ){ return ptr; }
+            }
+        }
+        else {
+            int lengthDiff = sizeB - sizeA;
+            ListNode ptr = headB;
+            while (lengthDiff > 0){
+                ptr = ptr.next;
+                lengthDiff--;
+            }
+            ptrA = headA;
+            while (ptrA != null && ptr != null){
+                ptrA = ptrA.next;
+                ptr = ptr.next;
+                if (ptr == ptrA){ return ptr; }
+            }
+        }
+        return null;
+    }
+
+    public boolean canPlaceFlowers(int[] flowerbed, int n){
+        if (flowerbed == null) {
+            return false;
+        }
+        else {
+            int count = n+2; //we need at least n+2 numbers of 0s in the array
+            for (int i = 0; i < flowerbed.length; i++){
+                int item = flowerbed[i];
+                if (item == 0 && count > 0){ count--;}
+                else if ( count == 0) { return true; }
+                else if (item == 1 && count != n+2) { count = n+2; } //if there's 1s in between
+            }
+            return false;
+        }
+    }
+
+    public boolean checkPossibility(int[] nums){
+        if (nums == null || nums.length == 0){
+            return false;
+        }
+        else if (nums.length > 2){
+            boolean foundTarget = false;
+            for (int i = 0; i + 2< nums.length; i++){
+                int item = nums[i];
+                if (i == 0){
+                    if (item > nums[i+1]){
+                        foundTarget = true;
+                        nums[i] = nums[i+1];
+                    }
+                }
+                else if (i > 0 && i + 2 < nums.length){
+                    if (item >= nums[i-1] && item <= nums[i+1]){
+                        continue;
+                    }
+                    else if ((item < nums[i-1] || item > nums[i+1]) && nums[i] <= nums[i+2]){
+                        if (foundTarget == false) {
+                            foundTarget = true;
+                            nums[i] = nums[i-1];
+                        }
+                        else return false;
+                    }
+                    else if ((item < nums[i-1] || item > nums[i+1]) &&
+                            (nums[i] <= nums[i+2]||nums[i-1] <= nums[i+1])){
+                        if (foundTarget == false) {
+                            foundTarget = true;
+                            nums[i] = nums[i-1];
+                        }
+                        else return false;
+                    }
+                    else if ((item < nums[i-1] || item > nums[i+1]) &&
+                             (nums[i] > nums[i+2]||nums[i-1] > nums[i+1])){
+                        return false;
+                    }
+                }
+            }
+            if (nums[0] > nums[nums.length-1]){
+                return false;
+            }
+            else return true;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean judgeSquareSum(int c) {
+        if (c<=0){
+            return false;
+        }
+        else {
+            int sum = 0;
+            int n = c;
+            while (n > 0){
+                if (c == n*n){ return true; }
+                else if (n*n > c){ n--; }
+                else {
+                    sum += n*n;
+                    n--;
+                }
+            }
+            if (sum == c){ return true; }
+            else return false;
+        }
+    }
+
+    public int maximumProduct(int[] nums) {
+        if (nums.length >= 3){
+            Arrays.sort(nums);
+            return Math.max(nums[0]* nums[1]* nums[nums.length-1],
+                    nums[nums.length-1]* nums[nums.length-2]* nums[nums.length-3] );
+        }
+        else return 0;
+    }
+
+    public boolean detectCapitalUse(String word) {
+        int cat = -1;
+        int innercat = -1;
+        if (word == null || word.length() == 0){
+            return false;
+        }
+        else if (word.length() == 1){
+            return true;
+        }
+        else {
+            for (int i = 0; i < word.length(); i++){
+                String item = word.substring(i, i+1);
+                if (i==0) {
+                    if (item.equals(item.toUpperCase())) {cat = 1;}
+                    else {cat = 2;}
+                }
+                else if (i==1){
+                    if (cat == 1){
+                        if (item.equals(item.toUpperCase())) {innercat = 1;}
+                        else {innercat = 2;}
+                    }
+                    else if (cat == 2){
+                        if (item.equals(item.toUpperCase())) {return false;}
+                    }
+                }
+                else {
+                    if (cat == 1 && innercat == 1){
+                        if (!item.equals(item.toUpperCase())){ return false;}
+                    }
+                    else if (cat == 1 && innercat == 2){
+                        if (item.equals(item.toUpperCase())){ return false;}
+                    }
+                    else if (cat == 2){
+                        if (item.equals(item.toUpperCase())){ return false; }
+                    }
+                }
+            }
+            return true;
+        }
     }
 
 
