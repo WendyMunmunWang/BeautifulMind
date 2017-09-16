@@ -1,7 +1,8 @@
+import com.sun.xml.internal.ws.wsdl.parser.MemberSubmissionAddressingWSDLParserExtension;
+
 import javax.print.attribute.standard.Chromaticity;
 import java.util.*;
-import com.sun.deploy.util.StringUtils.*;
-import com.sun.xml.internal.ws.util.StringUtils;
+import java.util.Map.Entry;
 
 /**
  * Created by wendywang on 2017-08-26.
@@ -503,6 +504,9 @@ public class Solution {
    }
 
     public int majorityElement(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return 0;
+        }
         HashMap hashMap = new HashMap();
         for (int i = 0; i < nums.length; i++){
             int item = nums[i];
@@ -513,9 +517,12 @@ public class Solution {
                 hashMap.put(item, 1);
             }
         }
-        int result = 0;
-        for (int j = 0; j < hashMap.size(); j++){
-            //how to iterate over a hashtable
+        Iterator<Entry<Integer, Integer>> entries = hashMap.entrySet().iterator();
+        while (entries.hasNext()){
+            Map.Entry<Integer, Integer> entry = (Map.Entry<Integer, Integer>) entries.next();
+            if (entry.getValue() > Math.floor(nums.length/2)){
+                return entry.getKey();
+            }
         }
         return 0;
     }
@@ -698,6 +705,73 @@ public class Solution {
             }
             return true;
         }
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1 == null && l2 == null){
+            return null;
+        }
+        else {
+            ListNode result = new ListNode(0);
+            ListNode p1 = l1;
+            ListNode p2 = l2;
+            ListNode reptr = result;
+            while (p1.next != null && p2.next != null){
+                int item = p1.val + p2.val;
+                if (item >= 10) {
+                    item = item % 10;
+                }
+                reptr.val = item;
+                p1 = p1.next;
+                p2 = p2.next;
+                reptr = reptr.next;
+
+            }
+            if (p1.next == null && p2.next == null){
+                return result;
+            }
+            else {
+                if (p1.next == null && p2.next != null){
+                    while (p2.next != null){
+                        reptr.val = p2.val;
+                        p2 = p2.next;
+                        reptr = reptr.next;
+                    }
+                }
+                else if (p1.next != null && p2.next == null){
+                    while (p1.next != null){
+                        reptr.val =  p1.val;
+                        p1 = p1.next;
+                        reptr = reptr.next;
+                    }
+                }
+                return result;
+            }
+        }
+
+    }
+
+    public boolean checkPerfectNumber(int num) {
+        if (num <= 0 || num >= Integer.MAX_VALUE) {return false;}
+        int divisor = 1;
+        int otherdiv = num/divisor;
+        int sum = 0;
+        while (divisor < num && divisor <= otherdiv){
+            if (num % divisor != 0){
+                divisor++;
+                otherdiv = num/divisor;
+            }
+            else {
+                sum += divisor;
+                if (otherdiv != num){
+                    sum += otherdiv;
+                }
+                divisor++;
+                otherdiv = num/divisor;
+            }
+        }
+        if (sum == num) {return true;}
+        else {return false;}
     }
 
 

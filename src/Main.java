@@ -85,8 +85,9 @@ public class Main {
         System.out.println(sol.checkPossibility(checkPos6));
         System.out.println(sol.checkPossibility(checkPos7));
         int ssnum = 3;
-        System.out.println("sum of square numbers: " + sol.judgeSquareSum( ssnum));
+        System.out.println("sum of square numbers: " + sol.judgeSquareSum(ssnum));
         String word = "FlaG";
         System.out.println("detect: " + sol.detectCapitalUse(word));
+        System.out.println("perfect num: " + sol.checkPerfectNumber(1));
     }
 }
