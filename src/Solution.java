@@ -573,19 +573,36 @@ public class Solution {
     }
 
     public boolean canPlaceFlowers(int[] flowerbed, int n){
-        if (flowerbed == null) {
+        if (flowerbed == null || flowerbed.length < 2*n-1){
             return false;
         }
-        else {
-            int count = n+2; //we need at least n+2 numbers of 0s in the array
-            for (int i = 0; i < flowerbed.length; i++){
-                int item = flowerbed[i];
-                if (item == 0 && count > 0){ count--;}
-                else if ( count == 0) { return true; }
-                else if (item == 1 && count != n+2) { count = n+2; } //if there's 1s in between
+        boolean isEdge = true;
+        int count = 0;
+        for (int i = 0; i < flowerbed.length; i++){
+            int item = flowerbed[i];
+            if (isEdge == true && 0 <= i && i <= 2*n-1){
+                if (item != 0){
+                    isEdge = false;
+                    count = 2*n+1;
+                }
+                else if (item == 0 && isEdge == true){
+                    return true;
+                }
             }
-            return false;
+            else {
+                if (item == 1 && count > 0){
+                    count=2*n+1;
+                }
+                else if (count==0) {
+                    return true;
+                }
+                else if (item == 0 && i == flowerbed.length-1 && count==1){
+                    return true;
+                }
+                else count--;
+            }
         }
+        return false;
     }
 
     public boolean checkPossibility(int[] nums){
@@ -772,6 +789,83 @@ public class Solution {
         }
         if (sum == num) {return true;}
         else {return false;}
+    }
+
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int sum = 0;
+        int i = 0;
+        while (i < nums.length){
+            sum += nums[i];
+            i = i + 2;
+        }
+        return sum;
+    }
+
+    public String[] findWords(String[] words) {
+        if (words == null || words.length == 0){
+            String[] emptyArray = new String[0];
+            return emptyArray;
+        }
+        String[] firstRow = {"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"};
+        String[] secondRow = {"a", "s", "d", "f", "g", "h", "j", "k", "l"};
+        String[] thirdRow = {"z", "x", "c", "v", "b", "n", "m"};
+        Set firstSet = new HashSet();
+        Set secondSet = new HashSet();
+        Set thirdSet = new HashSet();
+        int i = 0;
+        while (i < firstRow.length){
+            firstSet.add(firstRow[i]);
+            i++;
+        }
+        int j = 0;
+        while (j < secondRow.length){
+            secondSet.add(secondRow[j]);
+            j++;
+        }
+        int k = 0;
+        while (k < thirdRow.length){
+            thirdSet.add(thirdRow[k]);
+            k++;
+        }
+        i = 0;
+        ArrayList<String> result = new ArrayList();
+        while (i < words.length){
+            String item = words[i];
+            if (item.length() == 0){
+                i++;
+                continue;
+            }
+            else if (item.length() == 1){
+                result.add(item);
+                i++;
+                continue;
+            }
+            int cat = 0;
+            for (int itemIndex = 0; itemIndex < item.length(); itemIndex++){
+                String letter = item.substring(itemIndex, itemIndex+1);
+                letter = letter.toLowerCase();
+                if (firstSet.contains(letter) && itemIndex == 0){ cat = 1; }
+                else if (secondSet.contains(letter) && itemIndex == 0){ cat = 2; }
+                else if (thirdSet.contains(letter) && itemIndex == 0){ cat = 3; }
+                else {
+                    if ((!firstSet.contains(letter) && cat == 1) ||
+                            (!secondSet.contains(letter) && cat == 2) ||
+                            (!thirdSet.contains(letter) && cat == 3)) {
+                        break;
+                    }
+                    else if ((firstSet.contains(letter) && cat == 1 && itemIndex == item.length()-1) ||
+                            (secondSet.contains(letter) && cat == 2 && itemIndex == item.length()-1) ||
+                            (thirdSet.contains(letter) && cat == 3 && itemIndex == item.length()-1)) {
+                        result.add(item);
+                    }
+                }
+            }
+            i++;
+        }
+        String[] resultArray = new String[result.size()];
+        resultArray = result.toArray(resultArray);
+        return resultArray;
     }
 
 

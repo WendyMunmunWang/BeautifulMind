@@ -68,8 +68,8 @@ public class Main {
 //        System.out.println("Has cycle: " + sol.hasCycle(head));
         int[] errorNums = {2, 2};
         System.out.println(Arrays.toString(sol.findErrorNums(errorNums)));
-        int[] flowerbed = {1, 0, 0, 0, 1};
-        System.out.println(sol.canPlaceFlowers(flowerbed, 2));
+        int[] flowerbed = {1, 0, 0, 0, 1, 1};
+        System.out.println("flower: " + sol.canPlaceFlowers(flowerbed, 1));
         int[] checkPos = {2,3,3,2,4}; //should return true
         int[] checkPos2 = {4,2,3}; //should return true
         int[] checkPos3 = {1,2,3}; //should return true
@@ -89,5 +89,11 @@ public class Main {
         String word = "FlaG";
         System.out.println("detect: " + sol.detectCapitalUse(word));
         System.out.println("perfect num: " + sol.checkPerfectNumber(1));
+        int[] input = {1,4,3,2};
+        System.out.println(sol.arrayPairSum(input));
+        String[] words = {"Hello", "Alaska", "Dad", "Peace"};
+        String[] words2 = {"a", "b"};
+        System.out.println(Arrays.toString(sol.findWords(words2)));
+
     }
 }
