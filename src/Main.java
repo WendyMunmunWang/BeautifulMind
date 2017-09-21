@@ -94,6 +94,17 @@ public class Main {
         String[] words = {"Hello", "Alaska", "Dad", "Peace"};
         String[] words2 = {"a", "b"};
         System.out.println(Arrays.toString(sol.findWords(words2)));
+        int[] zeroNums = {0, 1, 0, 3, 2};
+        System.out.println(Arrays.toString(sol.moveZeroes(zeroNums)));
+        //System.out.println(Arrays.toString(sol.shiftLeft(zeroNums, 2, 2)));
+        int[] missingNums = {0}; //should return 1
+        int[] missingNums2 = {0,1,2};//should return 3
+        int[] missingNums3 = {1, 2, 3};//should return 0
+        int[] missingNums4 = {1};//should return 0
+        System.out.println(sol.missingNumber(missingNums));
+        System.out.println(sol.missingNumber(missingNums2));
+        System.out.println(sol.missingNumber(missingNums3));
+        System.out.println(sol.missingNumber(missingNums4));
 
     }
 }

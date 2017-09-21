@@ -868,6 +868,119 @@ public class Solution {
         return resultArray;
     }
 
+    public String reverseString(String s) {
+        if (s == null ){
+            return null;
+        }
+        else if (s.length() == 0) {
+            return "";
+        }
+        char[] word = s.toCharArray();
+        int left = 0;
+        int right = s.length()-1;
+        while (left < right){
+            char temp = word[left];
+            word[left] = word[right];
+            word[right] = temp;
+            left++;
+            right--;
+        }
+        return new String(word);
+    }
+
+    public int[] moveZeroes(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return null;
+        }
+        int i = 0;
+        int shiftNum = 0;
+        while (i < nums.length){
+            int item = nums[i];
+            if (item == 0){
+                shiftNum++;
+                i++;
+            }
+            else if (item != 0 && shiftNum > 0){
+                shiftLeft(nums, i, shiftNum);
+                if (i == nums.length-1){
+                    break;
+                }
+                else {
+                    i = 0;
+                    shiftNum = 0;
+                    continue;
+                }
+            }
+            else if (item != 0 && shiftNum == 0){
+                i++;
+            }
+        }
+        return nums;
+    }
+
+    public void shiftLeft(int[] nums, int fromIndex, int shiftNum){
+        int replace = fromIndex - shiftNum;
+        if (replace >= 0){
+            int i = fromIndex;
+            while (replace < fromIndex){
+                nums[replace] = nums[i];
+                if (i < nums.length - 1){
+                    replace++;
+                    i++;
+                }
+                else {
+                    replace++;
+                    break;
+                }
+
+            }
+            while (replace < nums.length){
+                nums[replace] = 0;
+                replace++;
+            }
+        }
+    }
+
+    public int missingNumber(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        int i = 0;
+        while (i + 1 < nums.length) {
+            int curr = nums[i];
+            int next = nums[i + 1];
+            if (curr + 1 == next) {
+                i++;
+            } else return curr + 1;
+        }
+        if (nums[0] == 0) {
+            return nums[nums.length - 1] + 1;
+        }
+        return 0;
+    }
+
+    public int arrangeCoins(int n) {
+        if (n > Integer.MAX_VALUE || n < Integer.MIN_VALUE){
+            return -1;
+        }
+        int i = 1;
+        while (n > 0){
+            n = n - i;
+            if (n == 0){
+                return i;
+            }
+            else if (n < 0){
+                return i - 1;
+            }
+            i++;
+        }
+        return 0;
+    }
+
+    public boolean canConstruct(String ransomNote, String magazine) {
+
+    }
 
 
 
