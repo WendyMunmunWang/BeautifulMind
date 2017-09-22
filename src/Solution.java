@@ -1092,6 +1092,30 @@ public class Solution {
         return result;
     }
 
+    public int findLengthOfLCIS(int[] nums) {
+        if (nums == null | nums.length > 10000 | nums.length == 0){
+            return 0;
+        }
+        int maxInc = Integer.MIN_VALUE;
+        int tracker = 1;
+        for (int i = 0; i+1 < nums.length; i++){
+            int item = nums[i];
+            if (item < nums[i+1]){
+                tracker++;
+            }
+            else {
+                if (tracker > maxInc){
+                    maxInc = tracker;
+                }
+                tracker = 1;
+            }
+        }
+        if (maxInc == Integer.MIN_VALUE | tracker > maxInc){
+            maxInc = tracker;
+        }
+        return maxInc;
+    }
+
 
 
 }
