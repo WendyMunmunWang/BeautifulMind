@@ -1071,6 +1071,27 @@ public class Solution {
         return max;
     }
 
+    public int[] constructRectangle(int area) {
+        if (area == 0){return null;}
+        int width = 1;
+        int length = 1;
+        int diff = Integer.MAX_VALUE;
+        int[] result = new int[2];
+        while (width <= length){
+            if (area % width == 0){
+                length = area/width;
+                if (diff > length - width){
+                    diff = length - width;
+                    result[0] = length;
+                    result[1] = width;
+                }
+            }
+            width++;
+            length = area/width;
+        }
+        return result;
+    }
+
 
 
 }
