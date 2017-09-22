@@ -979,7 +979,96 @@ public class Solution {
     }
 
     public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote == null || magazine == null){
+            return false;
+        }
+        else if (magazine.length() < ransomNote.length()){
+            return false;
+        }
+//        for (int i = 0; i < ransomNote.length(); i++){
+//            String ranItem = ransomNote.substring(i, i+1);
+//            String magItem = magazine.substring(i, i+1);
+//            if (!ranItem.equals(magItem)){
+//                return false;
+//            }
+//        }
+        if (magazine.contains(ransomNote)){
+            return true;
+        }
+        else return false;
+    }
 
+    public boolean isPowerOfTwo(int n) {
+        if (n < 0) {
+            return false;
+        }
+        while (n > 0){
+            if (n == 1){
+                break;
+            }
+            else if (n % 2 == 0){
+                n = n / 2;
+            }
+            else return false;
+        }
+        return true;
+    }
+
+    public boolean isPowerOfFour(int n) {
+        if (n < 0) {
+            return false;
+        }
+        while (n > 0){
+            if (n == 1){
+                break;
+            }
+            else if (n % 4 == 0){
+                n = n / 4;
+            }
+            else return false;
+        }
+        return true;
+    }
+
+    public boolean isPerfectSquare(int num) {
+        if (num > Integer.MAX_VALUE || num < Integer.MIN_VALUE){
+            return false;
+        }
+        int i = 1;
+        while (i * i <= num){
+            if (i * i == num){
+                return true;
+            }
+            i++;
+            if (i  > Math.sqrt(Integer.MIN_VALUE)){
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        if (nums == null || nums.length == 0){
+            return 0;
+        }
+        int count = 0;
+        int max = 0;
+        for (int i = 0; i < nums.length; i++){
+            int item = nums[i];
+            if (item == 1){
+                count++;
+            }
+            else if (item == 0){
+                if (count > max){
+                    max = count;
+                }
+                count = 0;
+            }
+        }
+        if (count > max){
+            max = count;
+        }
+        return max;
     }
 
 
