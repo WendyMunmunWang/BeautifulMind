@@ -655,23 +655,19 @@ public class Solution {
     }
 
     public boolean judgeSquareSum(int c) {
-        if (c<=0){
+        if (c < 0 || c > Integer.MAX_VALUE){
             return false;
         }
-        else {
-            int sum = 0;
-            int n = c;
-            while (n > 0){
-                if (c == n*n){ return true; }
-                else if (n*n > c){ n--; }
-                else {
-                    sum += n*n;
-                    n--;
-                }
+        HashSet<Integer> set = new HashSet<Integer>();
+        int a = 0;
+        while (a <= Math.sqrt(c)){
+            set.add(a*a);
+            if (set.contains(c-a*a)){
+                return true;
             }
-            if (sum == c){ return true; }
-            else return false;
+            a++;
         }
+        return false;
     }
 
     public int maximumProduct(int[] nums) {
@@ -725,47 +721,72 @@ public class Solution {
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if (l1 == null && l2 == null){
-            return null;
+        ListNode result = new ListNode(0);
+        ListNode ptr = result;
+        boolean tracker = false;
+        while (l1 != null && l2 != null){
+            int num_item = l1.val + l2.val;
+            if (tracker == true){ num_item++; }
+            if (num_item >= 10){
+                tracker = true;
+                num_item = num_item % 10;
+            }
+            else { tracker = false; }
+            System.out.println("num_item: " + num_item);
+            ptr.val = num_item;
+            if (l1.next != null || l2.next != null){
+                ptr.next = new ListNode(0);
+                ptr = ptr.next;
+            }
+            l1 = l1.next;
+            l2 = l2.next;
         }
-        else {
-            ListNode result = new ListNode(0);
-            ListNode p1 = l1;
-            ListNode p2 = l2;
-            ListNode reptr = result;
-            while (p1.next != null && p2.next != null){
-                int item = p1.val + p2.val;
-                if (item >= 10) {
-                    item = item % 10;
+        if (l1 != null){
+            while (l1 != null){
+                if (tracker == true){
+                    l1.val++;
                 }
-                reptr.val = item;
-                p1 = p1.next;
-                p2 = p2.next;
-                reptr = reptr.next;
-
-            }
-            if (p1.next == null && p2.next == null){
-                return result;
-            }
-            else {
-                if (p1.next == null && p2.next != null){
-                    while (p2.next != null){
-                        reptr.val = p2.val;
-                        p2 = p2.next;
-                        reptr = reptr.next;
-                    }
+                if (l1.val == 10){
+                    tracker = true;
+                    l1.val = 0;
                 }
-                else if (p1.next != null && p2.next == null){
-                    while (p1.next != null){
-                        reptr.val =  p1.val;
-                        p1 = p1.next;
-                        reptr = reptr.next;
-                    }
+                else {
+                    tracker = false;
                 }
-                return result;
+                ptr.val = l1.val;
+                if (l1.next != null){
+                    ptr.next = new ListNode(0);
+                    ptr = ptr.next;
+                }
+                l1 = l1.next;
             }
         }
-
+        else if (l2 != null){
+            while (l2 != null){
+                if (tracker == true){
+                    l2.val++;
+                }
+                if (l2.val == 10){
+                    tracker = true;
+                    l2.val = 0;
+                }
+                else {
+                    tracker = false;
+                }
+                ptr.val = l2.val;
+                if (l2.next != null){
+                    ptr.next = new ListNode(0);
+                    ptr = ptr.next;
+                }
+                l2 = l2.next;
+            }
+        }
+        if (tracker == true){
+            ptr.next = new ListNode(0);
+            ptr = ptr.next;
+            ptr.val = 1;
+        }
+        return result;
     }
 
     public boolean checkPerfectNumber(int num) {
